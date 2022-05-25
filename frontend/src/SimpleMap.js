@@ -1,9 +1,9 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 
-const SimpleMap = (props) => {
+const SimpleMap = ({ businesses }) => {
   const coordinates = { lat: 33.9806, lng: -117.3755 };
-  console.log(props);
+  console.log(businesses, "test");
 
   return (
     // Important! Always set the container height explicitly
@@ -13,13 +13,16 @@ const SimpleMap = (props) => {
         defaultCenter={coordinates}
         defaultZoom={10}
       >
-        <div
-          lat={33.9806}
-          lng={-117.3755}
-          style={{ fontSize: "50px", color: "red" }}
-        >
-          Hi
-        </div>
+        {businesses?.map((item) => {
+          let longitude = item.coordinates.longitude;
+          let latitude = item.coordinates.latitude;
+
+          return (
+            <div lat={latitude} lng={longitude}>
+              {item.name}
+            </div>
+          );
+        })}
       </GoogleMapReact>
     </div>
   );

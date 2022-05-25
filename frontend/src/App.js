@@ -11,7 +11,7 @@ function App() {
     event.preventDefault();
     axios.post("http://localhost:8000", { zip: zip }).then((res) => {
       console.log(res);
-      setBusinesses(res.data);
+      setBusinesses(res.data.businesses);
     });
   }
 
