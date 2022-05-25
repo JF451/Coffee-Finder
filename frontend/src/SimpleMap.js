@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
+import { FaCoffee } from "react-icons/fa";
 
 const SimpleMap = ({ businesses }) => {
   const coordinates = { lat: 33.9806, lng: -117.3755 };
@@ -19,7 +20,7 @@ const SimpleMap = ({ businesses }) => {
 
           return (
             <div lat={latitude} lng={longitude}>
-              {item.name}
+              <FaCoffee />
             </div>
           );
         })}
