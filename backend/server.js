@@ -4,13 +4,14 @@ const port = process.env.PORT || 5000;
 var axios = require("axios");
 
 const app = express();
-
+app.use(express.json());
 var cors = require("cors");
+
 app.use(cors());
 
 app.post("/", (req, res) => {
   console.log("In Server");
-  console.log(res.body);
+  console.log(req.body);
 
   var config = {
     method: "get",
