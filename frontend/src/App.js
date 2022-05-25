@@ -5,13 +5,11 @@ import SimpleMap from "./SimpleMap";
 
 function App() {
   const [zip, setZip] = useState("");
-  const [businessData, setbusinessData] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
     axios.post("http://localhost:8000", { zip: zip }).then((res) => {
-      console.log(res.data);
-      setbusinessData(res.data);
+      console.log(res);
     });
   }
 
@@ -21,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <SimpleMap businessData={businessData} />
+      <SimpleMap />
       <form onSubmit={handleSubmit}>
         <label>
           ZIP:

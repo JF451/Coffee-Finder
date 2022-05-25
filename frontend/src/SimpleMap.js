@@ -2,7 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 
 const SimpleMap = (props) => {
-  const coordinates = { lat: 59.955, lng: 30.337 };
+  const coordinates = { lat: 33.9806, lng: -117.3755 };
   console.log(props);
 
   return (
@@ -14,9 +14,9 @@ const SimpleMap = (props) => {
         defaultZoom={10}
       >
         <div
-          lat={59.955413}
-          lng={30.337844}
-          style={{ fontSize: "50px", color: "dodgerblue" }}
+          lat={33.9806}
+          lng={-117.3755}
+          style={{ fontSize: "50px", color: "red" }}
         >
           Hi
         </div>
