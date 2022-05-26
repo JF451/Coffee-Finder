@@ -1,13 +1,16 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const port = process.env.PORT || 5000;
+const { errorHandler } = require("./middleware/errorMiddleware");
 var axios = require("axios");
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 var cors = require("cors");
-
 app.use(cors());
+
+app.use("/api/favorites", require("./routes/favoritesRoutes"));
 
 app.post("/", (req, res) => {
   console.log("In Server");
@@ -32,5 +35,7 @@ app.post("/", (req, res) => {
       console.log(error);
     });
 });
+
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
