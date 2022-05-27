@@ -15,6 +15,7 @@ app.use(cors());
 connectDB();
 
 app.use("/api/favorites", require("./routes/favoritesRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.post("/", (req, res) => {
   console.log("In Server");
