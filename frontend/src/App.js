@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import axios from "axios";
 import SimpleMap from "./SimpleMap";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import DashBoard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Header from "./components/Header";
 
 function App() {
   const [zip, setZip] = useState("");
@@ -20,16 +24,31 @@ function App() {
   };
 
   return (
-    <div>
-      <SimpleMap businesses={businesses} />
-      <form onSubmit={handleSubmit}>
-        <label>
-          ZIP:
-          <input type="text" value={zip} name="zip" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+    <>
+      <Router>
+        <div className="containeer">
+          <Header />
+          <Routes>
+            <Route path="/" element={<DashBoard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+          <SimpleMap businesses={businesses} />
+          <form onSubmit={handleSubmit}>
+            <label>
+              ZIP:
+              <input
+                type="text"
+                value={zip}
+                name="zip"
+                onChange={handleChange}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </Router>
+    </>
   );
 }
 export default App;
