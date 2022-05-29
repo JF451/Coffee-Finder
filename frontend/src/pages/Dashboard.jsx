@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import FavoriteForm from "../components/FavoriteForm";
 import { getFavorites, reset } from "../features/favorites/favoritesSlice";
+import FavoriteItem from "../components/FavoriteItem";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ function Dashboard() {
     (state) => state.favorites
   );
 
+  console.log("in dashboard", favorites["favorites"]);
+
   useEffect(() => {
     if (isError) {
       console.log(message);
@@ -22,11 +25,11 @@ function Dashboard() {
       navigate("/login");
     }
 
-    // dispatch(getFavorites());
+    dispatch(getFavorites());
 
-    // return () => {
-    //   dispatch(reset());
-    // };
+    return () => {
+      dispatch(reset());
+    };
   }, [user, navigate, isError, message, dispatch]);
 
   return (
@@ -35,7 +38,12 @@ function Dashboard() {
         <h1>Welcome {user && user.name}</h1>
         <p>Favorites Dashboard</p>
       </section>
-      <FavoriteForm />
+      {/* <FavoriteForm /> */}
+      <div>
+        {favorites?.favorites?.map((favorite) => (
+          <FavoriteItem key={favorite._id} favorite={favorite} />
+        ))}
+      </div>
     </>
   );
 }

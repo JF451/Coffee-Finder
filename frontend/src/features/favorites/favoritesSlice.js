@@ -48,6 +48,25 @@ export const getFavorites = createAsyncThunk(
   }
 );
 
+//Delete favorite
+export const deleteFavorite = createAsyncThunk(
+  "favorites/delete",
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await favoritesService.deleteFavorite(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const favoriteSlice = createSlice({
   name: "favorite",
   initialState,
@@ -62,7 +81,7 @@ export const favoriteSlice = createSlice({
       .addCase(createFavorite.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.favorites.push(action.payload);
+        state.favorites.favorites.push(action.payload);
       })
       .addCase(createFavorite.rejected, (state, action) => {
         state.isLoading = false;
@@ -78,6 +97,21 @@ export const favoriteSlice = createSlice({
         state.favorites = action.payload;
       })
       .addCase(getFavorites.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteFavorite.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteFavorite.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.favorites = state.favorites.favorites.filter(
+          (favorite) => favorite._id !== action.payload.id
+        );
+      })
+      .addCase(deleteFavorite.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

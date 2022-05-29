@@ -21,8 +21,8 @@ const createFavorite = async (favoriteData, token) => {
     price: favoriteData.price,
   });
 
-  console.log(favoriteData);
   const response = await axios.post(API_URL, data, config);
+  console.log(response.data);
 
   return response.data;
 };
@@ -40,9 +40,23 @@ const getFavorites = async (token) => {
   return response.data;
 };
 
+//delete user goal
+const deleteFavorite = async (favoriteId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const response = await axios.delete(API_URL + favoriteId, config);
+
+  return response.data;
+};
+
 const favoritesService = {
   createFavorite,
   getFavorites,
+  deleteFavorite,
 };
 
 export default favoritesService;
