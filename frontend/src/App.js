@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import SimpleMap from "./SimpleMap";
+import SimpleMap from "./components/SimpleMap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import DashBoard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -48,6 +50,7 @@ function App() {
           </form>
         </div>
       </Router>
+      <ToastContainer />
     </>
   );
 }
