@@ -16,14 +16,18 @@ const getFavorites = asyncHandler(async (req, res) => {
 //@route POST /api/favorites
 //@access Private
 const setFavorite = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
-    res.status(400);
-    throw new Error("Pleas add a text field");
-  }
+  // if (!req.body.text) {
+  //   res.status(400);
+  //   throw new Error("Pleas add a text field");
+  // }
 
   const favorite = await Favorite.create({
-    text: req.body.text,
     user: req.user.id,
+    address: req.body.address,
+    name: req.body.name,
+    phone: req.body.phone,
+    rating: req.body.rating,
+    price: req.body.price,
   });
 
   res.status(200).json({ favorite });

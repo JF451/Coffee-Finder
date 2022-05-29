@@ -10,9 +10,8 @@ const favoriteSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    text: {
+    name: {
       type: String,
-      require: [true, "Please add a text value"],
     },
     address: {
       type: String,
@@ -20,10 +19,10 @@ const favoriteSchema = mongoose.Schema(
     phone: {
       type: String,
     },
-    location: {
+    rating: {
       type: String,
     },
-    rating: {
+    price: {
       type: String,
     },
   },
